@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 14:43:42 by pdavid            #+#    #+#             */
-/*   Updated: 2018/11/06 20:15:52 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/11/07 04:51:13 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,10 @@ void	init_flag(t_flags *flag)
 	flag->prec = -1;
 }
 
-void	formatprint(t_env *e, const char *format)
+void	init_format(t_env *e, const char *format)
 {
 	++e->i;
+	e->len = 0;
 	get_tag(e, format);
 	get_flag(e, format);
 	get_spec(e, format);
@@ -44,7 +45,7 @@ int		ft_printf(const char *format, ...)
 	{
 		if (format[e.i] == '%')
 		{
-			formatprint(&e, format);
+			init_format(&e, format);
 		}
 		else if (format[e.i] == '%' && format[e.i + 1] != '%')
 		{

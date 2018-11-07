@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 15:02:24 by pdavid            #+#    #+#             */
-/*   Updated: 2018/11/06 20:21:21 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/11/07 04:43:23 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,26 @@ void	get_prec(t_env *e, const char *format)
 	}
 }
 
+void	get_mod(t_env *e, const char *format)
+{
+	if (format[e->i] == 'h' && format[e->i] + 1 != 'h')
+	{
+		e->flag.mod = 'h';
+	}
+	else
+	{
+		e->flag.mod = 'a';
+	}
+}
+
 void	get_flag(t_env *e, const char *format)
 {
 	while (ft_strchr(FLAG, format[e->i]))
 	{
+		if (format[e->i] >= 'L' && format[e->i] <= 'z')
+		{
+			get_mod(e, format);
+		}
 		if (format[e->i] == '-')
 		{
 			e->flag.neg = 1;
@@ -67,28 +83,14 @@ void	get_flag(t_env *e, const char *format)
 		{
 			e->flag.zero = 1;
 		}
-		else if (ft_isdigit(format[e->i]))
+		else if (format[e->i] >= '1' && format[e->i] <= '9' && e->flag.prec < 0)
 		{
 			e->flag.width = ft_atoi(format + e->i);
-			while (ft_isdigit(format[e->i]))
-			{
+			while (format[e->i] >= '0' && format[e->i] <= '9')
 				++e->i;
-			}
 		}
 		else
 			++e->i;
-	}
-}
-
-void get_spec(t_env *e, const char *format)
-{
-	if (format[e->i] == 'c')
-	{
-		spec_char(e, format[e->i]);
-	}
-	else if (format[e->i] == 's')
-	{
-		spec_str(e, format[e->i]);
 	}
 }
 
@@ -98,6 +100,7 @@ void	get_tag(t_env *e, const char *format)
 	int	i;
 	
 	init_flag(&e->flag);
+	e->flag.mod = 0;
 	e->tag.tag = 0;
 	i = 0;
 	if (ft_isdigit(format[e->i]))
