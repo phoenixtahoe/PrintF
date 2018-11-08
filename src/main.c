@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 17:45:54 by pdavid            #+#    #+#             */
-/*   Updated: 2018/11/07 04:49:31 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/11/07 21:42:29 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int main()
 	setlocale(LC_ALL, "");
 	printf("%c\n", 'c' );
 	ft_printf("%c\n", 'c');
-	printf("%s\n", "fuck the ops");
-	ft_printf("%s\n", "fuck the ops");
-	printf("[%d]\n", 'a');
-	ft_printf("[%d]\n", 'a');
+	// printf("%s\n", "fuck the ops");
+	// ft_printf("%s\n", "fuck the ops");
+	// printf("[%i]\n", 'a');
+	// ft_printf("[%i]\n", 'a');
 	return (0);
 }

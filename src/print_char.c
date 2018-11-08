@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 14:23:16 by pdavid            #+#    #+#             */
-/*   Updated: 2018/11/07 04:25:48 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/11/07 22:12:07 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 void	char_width(t_env *e)
 {
-	while (e->flag.width-- > 1)
+	while (e->flag->width-- > 1)
 	{
-		if (e->flag.zero == 1)
+		if (e->flag->zero == 1)
 		{
 			e->ret += write(e->fd, "0", 1);
 		}
-		else if (e->flag.zero == 0)
+		else if (e->flag->zero == 0)
 		{
 			e->ret += write(e->fd, " ", 1);
 		}
@@ -29,13 +29,13 @@ void	char_width(t_env *e)
 
 void	char_null(t_env *e)
 {
-	while (e->flag.width-- > 1)
+	while (e->flag->width-- > 1)
 	{
-		if (e->flag.zero == 1)
+		if (e->flag->zero == 1)
 		{
 			e->ret += write(e->fd, "0", 1);
 		}
-		else if (e->flag.zero == 0)
+		else if (e->flag->zero == 0)
 		{
 			e->ret += write(e->fd, " ", 1);
 		}
@@ -46,7 +46,7 @@ void	char_null(t_env *e)
 
 void	char_print(t_env *e, char c)
 {
-	if (e->flag.minus)
+	if (e->flag->minus)
 	{
 		e->ret += write(e->fd, &c ,1);
 		char_width(e);
