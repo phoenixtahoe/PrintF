@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 18:05:54 by pdavid            #+#    #+#             */
-/*   Updated: 2018/11/07 21:41:58 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/11/08 23:46:32 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +15,31 @@
 void get_spec(t_env *e, const char *format)
 {
 	if (format[e->i] == 'c')
-	{
-		spec_char(e, format[e->i]);
-	}
-	else if (format[e->i] == 's')
-	{
-		spec_str(e, format[e->i]);
-	}
-	else if (format[e->i] == 'd' || format[e->i] == 'i')
-	{
+		spec_char(e);
+	if (format[e->i] == 's')
+		spec_str(e);
+	if (format[e->i] == 'd' || format[e->i] == 'i')
 		spec_int(e);
-	}
 }
 
-void	spec_char(t_env *e, char type)
+void	spec_char(t_env *e)
 {
-	int		tmp;
-
-		if (type == 'c')
-		{
-			char_arg(e, &tmp);
-			char_print(e, tmp);
-		}
+	char tmp;
+	
+	tmp = va_arg(e->ap, int);
+	e->output = &tmp;
+	char_print(e);
 }
 
-void	spec_str(t_env *e, char type)
+void	spec_str(t_env *e)
 {
 	char	*tmp;
 
-	if (type == 's')
-	{
-		str_arg(e, &tmp);
-		if (tmp == NULL)
-		{
-			return (str_null(e));
-		}
-		e->output = ft_strdup((char*)tmp);
-		str_print(e);
-	}
+	tmp = va_arg(e->ap, char *);
+	if (tmp == NULL)
+		return (str_null(e));
+	e->output = ft_strdup((char*)tmp);
+	str_print(e);
 }
 
 void	spec_int(t_env *e)
@@ -60,9 +47,21 @@ void	spec_int(t_env *e)
 	long	tmp;
 	long	i;
 
-	int_arg(e, &tmp);
+	tmp = va_arg(e->ap, long);
 	i = (long long)tmp;
-	if (e->flag->mod == '0')
-		e->output = ft_itoa((int)i);
+	if (e->flag->minus == 1)
+		e->flag->zero = 0;
+	if (e->flag->prec >= 0)
+		e->flag->zero = 0;
+	if (tmp == LONG_MAX || tmp == LONG_MIN)
+		e->output = ft_strdup("-9223372036854775808");
+	if (e->flag->mod == 2)
+		e->output = ft_itoa((char)i);
+	if (e->flag->mod == 1)
+		e->output = ft_itoa((short)i);
+	if (e->flag->mod == 3 || e->flag->mod == 4 || e->flag->mod == 5)
+		e->output = ft_ltoa((long)i);
+	if (e->flag->mod == 0)
+		e->output = ft_itoa((int)tmp);
 	int_print(e);
 }

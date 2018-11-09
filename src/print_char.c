@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 14:23:16 by pdavid            #+#    #+#             */
-/*   Updated: 2018/11/07 22:12:07 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/11/08 21:54:52 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,29 +44,17 @@ void	char_null(t_env *e)
 	}
 }
 
-void	char_print(t_env *e, char c)
+void	char_print(t_env *e)
 {
 	if (e->flag->minus)
 	{
-		e->ret += write(e->fd, &c ,1);
+		e->ret += write(e->fd, e->output, 1);
 		char_width(e);
 	}
 	else
 	{
 		char_width(e);
-		e->ret += write(e->fd, &c, 1);
+		e->ret += write(e->fd, e->output, 1);
 	}
 	++e->i;
-}
-
-void	char_arg(t_env *e, int *tmp)
-{
-	if (e->tag.tag)
-	{
-		va_copy(e->ap[0], e->ap[1]);
-		while (--e->tag.pos >= 0)
-			*tmp = va_arg(e->ap[0], int);
-		return ;
-	}
-	*tmp = va_arg(e->ap[0], int);
 }

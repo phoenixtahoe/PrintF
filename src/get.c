@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 15:02:24 by pdavid            #+#    #+#             */
-/*   Updated: 2018/11/07 22:18:08 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/11/08 23:58:12 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	get_width(t_env *e)
 {
-	e->flag->width = va_arg(e->ap[0], int);
+	e->flag->width = va_arg(e->ap, int);
 	if (e->flag->width < 0)
 	{
 		e->flag->width = -e->flag->width;
@@ -31,10 +31,10 @@ void	get_prec(t_env *e, const char *format)
 	}
 	if (format[e->i] == '.' && format[e->i + 1] == '*')
 	{
-		e->flag->prec = va_arg(e->ap[0], int);
+		e->flag->prec = va_arg(e->ap, int);
 		e->i += 2;
 	}
-	else if (format[e->i] == '.')
+	if (format[e->i] == '.')
 	{
 		++e->i;
 		e->flag->prec = ft_atoi(format + e->i);
@@ -46,43 +46,39 @@ void	get_prec(t_env *e, const char *format)
 void	get_mod(t_env *e, const char *format)
 {
 	if (format[e->i] == 'h' && format[e->i] + 1 != 'h')
-	{
-		e->flag->mod = 'h';
-	}
+		e->flag->mod = 1;
+	if (format[e->i] == 'h' && format[e->i + 1 == 'h'])
+		e->i++;
+		e->flag->mod = 2;
+	if (format[e->i] == 'l' && format[e->i + 1] != 'l')
+		e->flag->mod = 3;
+	if (format[e->i] == 'l' && format[e->i + 1] == 'l')
+		e->i++;
+		e->flag->mod = 4;
+	if (format[e->i] == 't')
+		e->flag->mod = 5;
 }
 
 void	get_flag(t_env *e, const char *format)
 {
 	while (ft_strchr(FLAG, format[e->i]))
 	{
-		// if (format[e->i] >= 'L' && format[e->i] <= 'z')
-		// {
-		// 	get_mod(e, format);
-		// }
+		if (format[e->i] >= 'L' && format[e->i] <= 'z')
+			get_mod(e, format);
 		if (format[e->i] == '-')
-		{
 			e->flag->minus = 1;
-		}
-		else if (format[e->i] == '+')
-		{
+		if (format[e->i] == '+')
 			e->flag->plus = 1;
-		}
-		else if (format[e->i] == ' ')
-		{
+		if (format[e->i] == ' ')
 			e->flag->space = 1;
-		}
-		else if (format[e->i] == '#')
-		{
+		if (format[e->i] == '#')
 			e->flag->hash = 1;
-		}
-		else if (format[e->i] == '0')
-		{
+		if (format[e->i] == '0')
 			e->flag->zero = 1;
-		}
-		else if (format[e->i] == '.')
-		{
+		if (format[e->i] == '.')
 			get_prec(e, format);
-		}
+		if (format[e->i] == '*')
+			get_width(e);
 		else if (format[e->i] >= '1' && format[e->i] <= '9' && e->flag->prec < 0)
 		{
 			e->flag->width = ft_atoi(format + e->i);
@@ -91,27 +87,5 @@ void	get_flag(t_env *e, const char *format)
 		}
 		else
 			++e->i;
-	}
-}
-
-void	get_tag(t_env *e, const char *format)
-{
-	int	tmp;
-	int	i;
-	
-	init_flag(e->flag);
-	e->tag.tag = 0;
-	i = 0;
-	if (ft_isdigit(format[e->i]))
-	{
-		tmp = ft_atoi(format + e->i);
-		while (ft_isdigit(format[e->i + i]))
-			i++;
-		if (format[e->i + i] == '$')
-		{
-			e->tag.tag = 1;
-			e->tag.pos = tmp;
-			e->i += i + 1;
-		}
 	}
 }

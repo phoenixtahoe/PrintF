@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 13:55:18 by pdavid            #+#    #+#             */
-/*   Updated: 2018/11/07 22:17:21 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/11/08 23:46:09 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,20 +34,20 @@ typedef	struct		s_flags
 	int				zero;
 	int				width;
 	int				prec;
-	char			mod;
+	char				mod;
 }					t_flags;
 
-typedef	struct		s_tag
+typedef	struct		s_tags
 {
 	int				tag;
 	int				pos;
-}					t_tag;
+}					t_tags;
 
 typedef	struct		s_env
 {
-	va_list			ap[2];
+	va_list			ap;
 	t_flags			*flag;
-	t_tag			tag;
+	t_tags			*tag;
 	char			*output;
 	int				i;
 	int				fd;
@@ -60,7 +60,7 @@ int		ft_printf(const char *format, ...);
 /* Init Core */
 
 void	init_format(t_env *e, const char *format);
-void	init_flag(t_flags flag);
+void	init_flags(t_flags *flag);
 
 /* Fetch op info */
 
@@ -74,18 +74,15 @@ void	get_tag(t_env *e, const char *format);
 void	str_width(t_env *e);
 void	str_null(t_env *e);
 void	str_print(t_env *e);
-void	str_arg(t_env *e, char **tmp);
 
 /* char functions */
 
 void	char_width(t_env *e);
 void	char_null(t_env *e);
-void	char_print(t_env *e, char c);
-void	char_arg(t_env *e, int *tmp);
+void	char_print(t_env *e);
 
 /* int functions */
 
-void	int_arg(t_env *e, long *tmp);
 void	int_sign(t_env *e);
 void	int_check(t_env *e);
 void	int_prec(t_env *e);
@@ -94,8 +91,8 @@ void	int_print(t_env *e);
 
 /* specification */
 
-void	spec_char(t_env *e, char type);
-void	spec_str(t_env *e, char type);
+void	spec_char(t_env *e);
+void	spec_str(t_env *e);
 void	spec_int(t_env *e);
 
 #endif

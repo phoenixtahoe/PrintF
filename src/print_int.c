@@ -6,31 +6,51 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 02:44:18 by pdavid            #+#    #+#             */
-/*   Updated: 2018/11/07 21:39:42 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/11/08 21:43:17 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
 
-void	int_arg(t_env *e, long *tmp)
-{
-	if (e->tag.tag)
-	{
-		va_copy(e->ap[0], e->ap[1]);
-		while (--e->tag.pos >= 0)
-			*tmp = va_arg(e->ap[0], long);
-		return ;
-	}
-	*tmp = va_arg(e->ap[0], long);
-}
-
 void	int_sign(t_env *e)
 {
-	if (e->flag->plus || e->flag->space)
-		e->ret += (e->flag->plus == 1 ?
-		write(e->fd, "+", 1) : write(e->fd, " ", 1));
-	else if (e->flag->neg)
+	if (e->flag->space)
+		e->ret += write(e->fd, " ", 1);
+	if (e->flag->plus)
+		e->ret += write(e->fd, "+", 1);
+	if (e->flag->neg)
 		e->ret += write(e->fd, "-", 1);
+}
+
+void	int_width(t_env *e)
+{
+	int i;
+
+	i = -1;
+	if (((int)ft_strlen(e->output) > e->flag->prec))
+		e->len = (int)ft_strlen(e->output);
+	else
+		e->len = e->flag->prec;
+	if ((e->flag->plus + e->flag->space + e->flag->neg) >= 1)
+		e->flag->width--;
+	if (e->flag->prec >= 0)
+	{
+		while (e->flag->width - ++i > e->len)
+			e->ret += write(e->fd, " ", 1);
+		i = -1;
+		while ((int)ft_strlen(e->output) < e->len - ++i)
+			e->ret += write(e->fd, "0", 1);
+	}
+	else
+	{
+		while (e->flag->width - ++i > e->len)
+		{
+			if (e->flag->zero == 1)
+				e->ret += write(e->fd, "0", 1);
+			else
+				e->ret += write(e->fd, " ", 1);
+		}
+	}
 }
 
 void	int_check(t_env *e)
@@ -53,8 +73,7 @@ void	int_prec(t_env *e)
 	char	*tmp;
 	char	*res;
 	int		i;
-	
-	int_check(e);
+
 	e->len = (int)ft_strlen(e->output);
 	if (e->flag->prec == 0 && e->output[0] == '0')
 		e->output[0] = '\0';
@@ -71,30 +90,9 @@ void	int_prec(t_env *e)
 	}
 }
 
-void	int_width(t_env *e)
-{
-	int i;
-
-	i = -1;
-	e->len = ((int)ft_strlen(e->output) > e->flag->prec ?
-	(int)ft_strlen(e->output) : e->flag->prec);
-	(e->flag->plus + e->flag->space + e->flag->neg) >= 1 ? e->flag->width-- : 0;
-	if (e->flag->prec >= 0)
-	{
-		while (e->flag->width - ++i > e->len)
-			e->ret += write(e->fd, " ", 1);
-		i = -1;
-		while ((int)ft_strlen(e->output) < e->len - ++i)
-			e->ret += write(e->fd, "0", 1);
-	}
-	else
-		while (e->flag->width - ++i > e->len)
-			e->ret += (e->flag->zero == 1 ?
-			write(e->fd, "0", 1) : write(e->fd, " ", 1));
-}
-
 void	int_print(t_env *e)
 {
+	int_check(e);
 	int_prec(e);
 	if (e->flag->zero)
 	{
