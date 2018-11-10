@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 13:54:24 by pdavid            #+#    #+#             */
-/*   Updated: 2018/11/08 21:43:26 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/11/09 02:10:56 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@ void	str_width(t_env *e)
 
 void	str_null(t_env *e)
 {
+	if (e->flag->prec < 0)
+	{
+		e->len = 6;
+	}
+	else
+	{
+		e->len = e->flag->prec;
+	}
 	while (e->flag->width-- > e->len)
 	{
 		if (e->flag->zero == 1)
@@ -45,17 +53,17 @@ void	str_print(t_env *e)
 	{
 		tmp = ft_strsub(e->output, 0, (e->flag->prec));
 		free(e->output);
-		tmp = e->output;
+		e->output = tmp;
 	}
 	if (e->flag->minus)
 	{
-		e->ret += write(e->fd, e->output, ft_strlen(e->output));
+		e->ret += write(e->fd, e->output, e->len);
 		str_width(e);
 	}
 	else
 	{
 		str_width(e);
-		e->ret += write(e->fd, e->output, ft_strlen(e->output));
+		e->ret += write(e->fd, e->output, e->len);
 	}
 	++e->i;
 	free(e->output);

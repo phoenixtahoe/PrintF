@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/07 02:44:18 by pdavid            #+#    #+#             */
-/*   Updated: 2018/11/08 21:43:17 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/11/09 02:11:52 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	int_prec(t_env *e)
 	char	*res;
 	int		i;
 
+	int_check(e);
 	e->len = (int)ft_strlen(e->output);
 	if (e->flag->prec == 0 && e->output[0] == '0')
 		e->output[0] = '\0';
@@ -92,7 +93,6 @@ void	int_prec(t_env *e)
 
 void	int_print(t_env *e)
 {
-	int_check(e);
 	int_prec(e);
 	if (e->flag->zero)
 	{

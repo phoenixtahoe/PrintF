@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 18:05:54 by pdavid            #+#    #+#             */
-/*   Updated: 2018/11/08 23:46:32 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/11/09 01:51:22 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	spec_int(t_env *e)
 		e->flag->zero = 0;
 	if (e->flag->prec >= 0)
 		e->flag->zero = 0;
-	if (tmp == LONG_MAX || tmp == LONG_MIN)
+	if (tmp == LLONG_MAX || tmp == LONG_MIN)
 		e->output = ft_strdup("-9223372036854775808");
 	if (e->flag->mod == 2)
 		e->output = ft_itoa((char)i);

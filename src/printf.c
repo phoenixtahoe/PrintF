@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 14:43:42 by pdavid            #+#    #+#             */
-/*   Updated: 2018/11/08 21:37:26 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/11/09 01:45:02 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		ft_printf(const char *format, ...)
 			e->i += 2;
 		}
 		else
-			e->ret += write(1 , &format[e->i++], 1);
+			e->ret += write(e->fd, &format[e->i++], 1);
 	}
 	va_end(e->ap);
 	return(e->ret);
