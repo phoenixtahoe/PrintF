@@ -6,7 +6,7 @@
 #    By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:12:14 by pdavid            #+#    #+#              #
-#    Updated: 2018/11/07 19:11:37 by pdavid           ###   ########.fr        #
+#    Updated: 2018/12/06 12:12:36 by pdavid           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ header = ./includes/ft_printf.h
 
 includes = ./includes/libft/libft.a
 
-SRC = ./src/printf.c ./src/print_str.c ./src/print_char.c ./src/main.c ./src/print_int.c ./src/get.c ./src/spec.c
+SRC = ./src/printf.c ./src/print_str.c ./src/print_char.c ./src/main.c ./src/print_int.c ./src/get.c ./src/spec.c ./src/print_wchar.c ./src/print_wstr.c
 
 OBJ = *.o
 

@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 15:02:24 by pdavid            #+#    #+#             */
-/*   Updated: 2018/11/08 23:58:12 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/12/06 16:10:33 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,25 @@ void	get_width(t_env *e)
 	}
 }
 
+void get_spec(t_env *e, const char *format)
+{
+	if (format[e->i] == 'c')
+		spec_char(e);
+	if (format[e->i] == 's')
+		spec_str(e);
+	if (format[e->i] == 'C' || format[e->i] == 'S')
+		if (format[e->i] == 'C')
+			spec_wchar(e, format[e->i]);
+		if (format[e->i] == 'S')
+			spec_wstr(e, format[e->i]);
+	if (format[e->i] == 'd' || format[e->i] == 'i')
+		spec_int(e);
+	if (format[e->i] == '%')
+		spec_percent(e);
+	if (ft_strchr(PREC, format[e->i]))
+		printf("%s\n", "fuck");
+}
+
 void	get_prec(t_env *e, const char *format)
 {
 	if (e->flag->prec >= 0)
@@ -34,11 +53,11 @@ void	get_prec(t_env *e, const char *format)
 		e->flag->prec = va_arg(e->ap, int);
 		e->i += 2;
 	}
-	if (format[e->i] == '.')
+	else if (format[e->i] == '.')
 	{
 		++e->i;
 		e->flag->prec = ft_atoi(format + e->i);
-		while (format[e->i] >= '0' && format[e->i] <= '9')
+		while (ft_isdigit(format[e->i]))
 			++e->i;
 	}
 }
@@ -57,6 +76,8 @@ void	get_mod(t_env *e, const char *format)
 		e->flag->mod = 4;
 	if (format[e->i] == 't')
 		e->flag->mod = 5;
+	if (format[e->i] == 'L')
+		e->flag->mod = 6;
 }
 
 void	get_flag(t_env *e, const char *format)
@@ -67,18 +88,28 @@ void	get_flag(t_env *e, const char *format)
 			get_mod(e, format);
 		if (format[e->i] == '-')
 			e->flag->minus = 1;
+		else
+			e->flag->minus = 0;
 		if (format[e->i] == '+')
 			e->flag->plus = 1;
+		else
+			e->flag->plus = 0;
 		if (format[e->i] == ' ')
 			e->flag->space = 1;
+		else
+			e->flag->space = 0;
 		if (format[e->i] == '#')
 			e->flag->hash = 1;
+		else
+			e->flag->hash = 0;
 		if (format[e->i] == '0')
 			e->flag->zero = 1;
-		if (format[e->i] == '.')
-			get_prec(e, format);
+		else
+			e->flag->zero = 0;
 		if (format[e->i] == '*')
 			get_width(e);
+		if (format[e->i] == '.')
+			get_prec(e, format);
 		else if (format[e->i] >= '1' && format[e->i] <= '9' && e->flag->prec < 0)
 		{
 			e->flag->width = ft_atoi(format + e->i);

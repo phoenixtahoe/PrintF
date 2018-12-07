@@ -6,21 +6,11 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 18:05:54 by pdavid            #+#    #+#             */
-/*   Updated: 2018/11/09 01:51:22 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/12/06 16:10:03 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-
-void get_spec(t_env *e, const char *format)
-{
-	if (format[e->i] == 'c')
-		spec_char(e);
-	if (format[e->i] == 's')
-		spec_str(e);
-	if (format[e->i] == 'd' || format[e->i] == 'i')
-		spec_int(e);
-}
 
 void	spec_char(t_env *e)
 {
@@ -55,13 +45,79 @@ void	spec_int(t_env *e)
 		e->flag->zero = 0;
 	if (tmp == LLONG_MAX || tmp == LONG_MIN)
 		e->output = ft_strdup("-9223372036854775808");
-	if (e->flag->mod == 2)
+	else if (e->flag->mod == 2)
 		e->output = ft_itoa((char)i);
-	if (e->flag->mod == 1)
+	else if (e->flag->mod == 1)
 		e->output = ft_itoa((short)i);
-	if (e->flag->mod == 3 || e->flag->mod == 4 || e->flag->mod == 5)
+	else if (e->flag->mod == 3 || e->flag->mod == 4 || e->flag->mod == 5)
 		e->output = ft_ltoa((long)i);
-	if (e->flag->mod == 0)
+	else if (e->flag->mod == 0)
 		e->output = ft_itoa((int)tmp);
 	int_print(e);
+}
+
+void	spec_percent(t_env *e)
+{
+	if (e->flag->minus)
+	{
+		e->ret += write(e->fd, "%", 1);
+		while (e->flag->width-- > 1)
+		{
+			e->ret += write(e->fd, " ", 1);
+		}
+	}
+	else
+	{
+		while (e->flag->width-- > 1)
+		{
+			if (e->flag->zero)
+			{
+				e->ret += write(e->fd, "0", 1);
+			}
+			else
+			{
+				e->ret += write(e->fd, " ", 1);
+			}
+		}
+		e->ret += write(e->fd, "%", 1);
+	}
+	++e->i;
+}
+
+void	spec_wchar(t_env *e, char type)
+{
+	wchar_t wc;
+
+	wc = va_arg(e->ap, wchar_t);
+	if (e->flag->minus)
+	{
+		e->flag->zero = 0;
+	}
+	if (type == 'C')
+	{
+		if (wc == 0)
+		{
+			return(char_null(e));
+		}
+		print_wchar(e, wc);
+	}
+}
+
+void	spec_wstr(t_env *e, char type)
+{
+	wchar_t	*ws;
+
+	ws = va_arg(e->ap, wchar_t *);
+	if (e->flag->minus)
+	{
+		e->flag->zero = 0;
+	}
+	if (type == 'S' || type == 's')
+	{
+		if (ws == NULL)
+		{
+			return(str_null(e));
+		}
+		print_wstr(e, ws);
+	}
 }

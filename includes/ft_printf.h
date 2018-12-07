@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 13:55:18 by pdavid            #+#    #+#             */
-/*   Updated: 2018/11/08 23:46:09 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/12/06 15:10:11 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include "../includes/libft/libft.h"
 
 # define FLAG " #*+-.0123456789Lhjltz"
+# define PREC "fageFAGE"
 
 typedef	struct		s_flags
 {
@@ -81,6 +82,18 @@ void	char_width(t_env *e);
 void	char_null(t_env *e);
 void	char_print(t_env *e);
 
+/* w_char functions */
+
+void	wutchar(t_env *e, char c);
+void    print_wchar(t_env *e, wchar_t c);
+void    put_wchar(t_env *e, wchar_t c);
+
+/* w_str functions */
+
+void	print_wstr(t_env *e, wchar_t *c);
+int		wstr_width(wchar_t *c);
+void    put_wstr(t_env *e, wchar_t c);
+
 /* int functions */
 
 void	int_sign(t_env *e);
@@ -94,5 +107,8 @@ void	int_print(t_env *e);
 void	spec_char(t_env *e);
 void	spec_str(t_env *e);
 void	spec_int(t_env *e);
+void	spec_percent(t_env *e);
+void	spec_wchar(t_env *e, char type);
+void	spec_wstr(t_env *e, char type);
 
 #endif
