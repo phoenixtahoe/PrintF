@@ -6,11 +6,11 @@
 #    By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:12:14 by pdavid            #+#    #+#              #
-#    Updated: 2018/12/07 20:01:13 by pdavid           ###   ########.fr        #
+#    Updated: 2018/12/07 20:16:15 by pdavid           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = *.c
+SRC = ft_atoi.c ft_isdigit.c ft_bzero.c ft_strcat.c ft_strcpy.c ft_itoa.c ft_ltoa.c ft_strchr.c ft_strdup.c ft_strjoin.c ft_strlen.c ft_strnew.c ft_strsub.c get.c print_char.c print_int.c print_wchar.c print_wstr.c print_str.c spec.c printf.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -19,7 +19,7 @@ OBJDIR = objs
 
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 OBJS = $(addprefix $(OBJDIR)/, $(OBJ))
-HEADER = -I includes/ft_printf.h
+HEADER = -I includes
 
 CC = gcc
 CFLAGS = -c -Wall -Wextra -Werror
