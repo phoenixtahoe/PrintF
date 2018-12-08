@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 15:02:24 by pdavid            #+#    #+#             */
-/*   Updated: 2018/12/06 16:10:33 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/12/07 18:25:48 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void get_spec(t_env *e, const char *format)
 		spec_int(e);
 	if (format[e->i] == '%')
 		spec_percent(e);
-	if (ft_strchr(PREC, format[e->i]))
-		printf("%s\n", "fuck");
 }
 
 void	get_prec(t_env *e, const char *format)
