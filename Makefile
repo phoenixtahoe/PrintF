@@ -6,9 +6,13 @@
 #    By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:12:14 by pdavid            #+#    #+#              #
-#    Updated: 2018/12/07 18:44:32 by pdavid           ###   ########.fr        #
+#    Updated: 2018/12/07 18:58:41 by pdavid           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+make_libft = @make -C ./includes/libft/
+
+libfth = /includes/libft/libft.a
 
 SRC = printf.c print_str.c print_char.c main.c print_int.c get.c spec.c print_wchar.c print_wstr.c ft_ltoa.c
 
@@ -22,7 +26,7 @@ OBJS = $(addprefix $(OBJDIR)/, $(OBJ))
 HEADER = -I includes
 
 CC = gcc
-CFLAGS = -c -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 NAME = libftprintf.a
 
@@ -33,7 +37,7 @@ all: $(NAME)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@/bin/mkdir -p $(OBJDIR)
-	@$(CC) $(CFLAGS) $(HEADER) $< -o $@
+	@$(CC) $(CFLAGS) $(HEADER) -c $< -o $@
 
 $(NAME): $(OBJS)
 	@ar rcs $@ $^
