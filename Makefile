@@ -6,13 +6,13 @@
 #    By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:12:14 by pdavid            #+#    #+#              #
-#    Updated: 2018/12/07 16:47:51 by pdavid           ###   ########.fr        #
+#    Updated: 2018/12/07 17:00:02 by pdavid           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 cflags = -fsanitize=address -Wall -Wextra -Werror
 
-make_libft = @make -C ./includes/libft/
+lbift_src = ./includes/libft/*.c
 
 header = ./includes/ft_printf.h
 
@@ -24,23 +24,24 @@ OBJ = *.o
 
 cc = @gcc
 
-name = ft_printf
+name = libftprintf.a
 
 all: $(name)
 
 $(name):
 	@printf "\e[1;31mMaking libft\e[0m\n"
-	@$(make_libft)
 	@printf "\e[1;31mCompiling $(name)\e[0m\n"
-	@$(cc) $(cflags) -g $(SRC) $(includes) -o $(name)
-	@printf "\e[1;32m$(name) Excutable Created!\e[0m\n"
+	gcc $(FLAGS) -c $(SRC) $(LIBFT_SRC)
+	@printf "\e[1;32m$(NAME) Created!\e[0m\n"
+	ar rcs libftprintf.a $(OBJ)
+	ranlib $(NAME)
+
 
 clean:
 	@printf "\e[1;32mCleaning!\e[0m\n"
-	@make -C includes/libft/ fclean
-	@/bin/rm -f $(name)
+	@/bin/rm -rf $(OBJ)
 
 fclean:
-	@make -C includes/libft/ fclean
+	@/bin/rm -rf $(NAME)
 
 re : clean all
