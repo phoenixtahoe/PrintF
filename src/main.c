@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 17:45:54 by pdavid            #+#    #+#             */
-/*   Updated: 2018/12/06 15:54:14 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/12/07 16:34:08 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,8 @@ int main()
 	ft_printf("prec 5: [%.5i]\n", 0);
 	printf("prec 5: [%.5i]\n", 0);
 	
-	ft_printf("width 5:	[%5i]\n", 4);
-	printf("width 5: [%5i]\n", 4);
-
-	ft_printf("prec 5: [%.5i]\n", 4);
-	printf("prec 5: [%.5i]\n", 4);
+	ft_printf("width 5:	[%15i]\n", 0);
+	printf("width 5: [%15i]\n", 0);
 
 	ft_printf("prec 5: [%.5i]\n", 0);
 	printf("prec 5: [%.5i]\n", 0);
