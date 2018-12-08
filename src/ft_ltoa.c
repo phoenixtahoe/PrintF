@@ -6,9 +6,11 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 16:42:54 by pdavid            #+#    #+#             */
-/*   Updated: 2018/12/07 16:43:14 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/12/07 18:17:16 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../includes/ft_printf.h"
 
 char	*ft_ltoa(long n)
 {
@@ -16,7 +18,7 @@ char	*ft_ltoa(long n)
 	long	nb;
 	int		len;
 
-	if (n == -9223372036854775808)
+	if (n == LONG_MIN)
 		return (ft_strdup("-9223372036854775808"));
 	len = 1;
 	n < 0 ? ++len : 0;
