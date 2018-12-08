@@ -6,7 +6,7 @@
 #    By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:12:14 by pdavid            #+#    #+#              #
-#    Updated: 2018/12/07 19:53:33 by pdavid           ###   ########.fr        #
+#    Updated: 2018/12/07 20:01:13 by pdavid           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ OBJDIR = objs
 
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 OBJS = $(addprefix $(OBJDIR)/, $(OBJ))
-HEADER = -I includes
+HEADER = -I includes/ft_printf.h
 
 CC = gcc
 CFLAGS = -c -Wall -Wextra -Werror
@@ -38,7 +38,7 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 $(NAME): $(OBJS)
 	@ar rcs $@ $^
 	@ranlib $@
-	@echo "[ft_printf - 모래반지 빵야빵야!]"
+	@echo "[ft_printf!]"
 
 clean:
 	@/bin/rm -rf $(OBJDIR)
