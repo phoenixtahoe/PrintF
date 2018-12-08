@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 13:55:18 by pdavid            #+#    #+#             */
-/*   Updated: 2018/12/07 19:55:13 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/12/07 20:09:19 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <wchar.h>
 # include <limits.h>
 # include <stdint.h>
-# include "libft.h"
 
 # define FLAG " #*+-.0123456789Lhjltz"
 # define PREC "fageFAGE"
@@ -110,5 +109,18 @@ void	spec_int(t_env *e);
 void	spec_percent(t_env *e);
 void	spec_wchar(t_env *e, char type);
 void	spec_wstr(t_env *e, char type);
+
+/* helper functions */
+
+int		ft_isdigit(int c);
+int		ft_atoi(const char *str);
+char	*ft_itoa(int nbr);
+char	*ft_ltoa(long n);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *src);
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlen(const char *s);
+char	*ft_strnew(size_t size);
+char	*ft_strsub(char const *s, unsigned int start, size_t len);
 
 #endif
