@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 15:02:24 by pdavid            #+#    #+#             */
-/*   Updated: 2018/12/07 18:26:57 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/12/07 23:20:19 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,30 +82,13 @@ void	get_flag(t_env *e, const char *format)
 {
 	while (ft_strchr(FLAG, format[e->i]))
 	{
-		if (format[e->i] >= 'L' && format[e->i] <= 'z')
-			get_mod(e, format);
-		if (format[e->i] == '-')
-			e->flag->minus = 1;
-		else
-			e->flag->minus = 0;
-		if (format[e->i] == '+')
-			e->flag->plus = 1;
-		else
-			e->flag->plus = 0;
-		if (format[e->i] == ' ')
-			e->flag->space = 1;
-		else
-			e->flag->space = 0;
-		if (format[e->i] == '#')
-			e->flag->hash = 1;
-		else
-			e->flag->hash = 0;
-		if (format[e->i] == '0')
-			e->flag->zero = 1;
-		else
-			e->flag->zero = 0;
-		if (format[e->i] == '*')
-			get_width(e);
+		format[e->i] >= 'L' && format[e->i] <= 'z' ? get_mod(e, format) : 0;
+		format[e->i] == ' ' ? e->flag->space = 1 : 0;
+		format[e->i] == '-' ? e->flag->minus = 1 : 0;
+		format[e->i] == '+' ? e->flag->plus = 1 : 0;
+		format[e->i] == '#' ? e->flag->hash = 1 : 0;
+		format[e->i] == '*' ? get_width(e) : 0;
+		format[e->i] == '0' ? e->flag->zero = 1 : 0;
 		if (format[e->i] == '.')
 			get_prec(e, format);
 		else if (format[e->i] >= '1' && format[e->i] <= '9' && e->flag->prec < 0)

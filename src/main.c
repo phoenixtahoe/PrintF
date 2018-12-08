@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 17:45:54 by pdavid            #+#    #+#             */
-/*   Updated: 2018/12/07 16:34:08 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/12/07 23:06:48 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,48 +20,7 @@
 
 int main()
 {
-	int a;
-
-	a = 150;
-	setlocale(LC_ALL, "");
-	
-	printf("normal: [%C]\n", L'👼');
-	ft_printf("normal: [%C]\n", L'👼');
-	
-	printf("width 20 = [%C]\n", L'갔');
-	ft_printf("width 20 = [%C]\n", L'갔');
-	
-	printf("width 20 = [%20S]\n", L"@@");
-	ft_printf("width 20 = [%20S]\n", L"@@");
-
-	
-	ft_printf("space: [% i]\n", 42);
-	printf("space: [% i]\n", 42);
-	
-	ft_printf("plus: [%+i]\n", 0);
-	printf("plus: [%+i]\n", 0);
-	
-	ft_printf("width 10: [%10i]\n", 0);
-	printf("width 10: [%10i]\n", 0);
-	
-	ft_printf("prec 5: [%.5i]\n", 0);
-	printf("prec 5: [%.5i]\n", 0);
-	
-	ft_printf("width 5:	[%15i]\n", 0);
-	printf("width 5: [%15i]\n", 0);
-
-	ft_printf("prec 5: [%.5i]\n", 0);
-	printf("prec 5: [%.5i]\n", 0);
-	
-	
-	ft_printf("prec 0: [%.0i]\n", -1);
-	printf("prec 0: [%0.i]\n", -1);
-	
-	
-	ft_printf("width 10: [%10i]\n", +42);
-	printf("width 10: [%10i]\n", +42);
-	
-	ft_printf("width 4: [%4i]\n", 42);
-    printf("width 4: [%4i]\n", 42);
+	ft_printf("You can" "[%0+5d]\n", 42);
+	printf("Do dis" "[%0+5d]\n", 42);
 	return (0);
 }
