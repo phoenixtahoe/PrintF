@@ -6,7 +6,7 @@
 #    By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:12:14 by pdavid            #+#    #+#              #
-#    Updated: 2018/12/07 18:21:56 by pdavid           ###   ########.fr        #
+#    Updated: 2018/12/07 18:31:05 by pdavid           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ $(name):
 	ranlib libftprintf.a
 
 
-clean:
+clean: all
 	@printf "\e[1;32mCleaning!\e[0m\n"
 	@/bin/rm -rf $(OBJ)
 	@/bin/rm -rf $(lbift_obj)
