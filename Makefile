@@ -6,7 +6,7 @@
 #    By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:12:14 by pdavid            #+#    #+#              #
-#    Updated: 2018/12/06 12:12:36 by pdavid           ###   ########.fr        #
+#    Updated: 2018/12/07 16:47:51 by pdavid           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ OBJ = *.o
 
 cc = @gcc
 
-name = Printf
+name = ft_printf
 
 all: $(name)
 
