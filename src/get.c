@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 15:02:24 by pdavid            #+#    #+#             */
-/*   Updated: 2018/12/07 18:25:48 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/12/07 18:26:57 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,16 @@ void get_spec(t_env *e, const char *format)
 {
 	if (format[e->i] == 'c')
 		spec_char(e);
-	if (format[e->i] == 's')
+	else if (format[e->i] == 's')
 		spec_str(e);
-	if (format[e->i] == 'C' || format[e->i] == 'S')
+	else if (format[e->i] == 'C' || format[e->i] == 'S')
 		if (format[e->i] == 'C')
 			spec_wchar(e, format[e->i]);
-		if (format[e->i] == 'S')
+		else
 			spec_wstr(e, format[e->i]);
-	if (format[e->i] == 'd' || format[e->i] == 'i')
+	else if (format[e->i] == 'd' || format[e->i] == 'i')
 		spec_int(e);
-	if (format[e->i] == '%')
+	else if (format[e->i] == '%')
 		spec_percent(e);
 }
 

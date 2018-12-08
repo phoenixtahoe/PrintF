@@ -6,11 +6,11 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/06 14:02:22 by pdavid            #+#    #+#             */
-/*   Updated: 2017/10/18 12:30:36 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/12/07 19:55:31 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/ft_printf.h"
 
 char	*ft_itoa(int nbr)
 {

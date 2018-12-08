@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmap.c                                        :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/04 14:54:29 by pdavid            #+#    #+#             */
-/*   Updated: 2017/12/05 12:35:15 by pdavid           ###   ########.fr       */
+/*   Created: 2017/10/04 14:39:37 by pdavid            #+#    #+#             */
+/*   Updated: 2018/12/07 19:55:53 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/ft_printf.h"
 
-char	*ft_strmap(char const *s, char (*f)(char))
+char	*ft_strnew(size_t size)
 {
-	int		i;
-	char	*str;
+	char *tab;
 
-	i = 0;
-	if (!s || !f)
+	if (!(tab = (void *)malloc(size + 1)))
 		return (NULL);
-	str = (char *)malloc((ft_strlen(s) + 1) * sizeof(char));
-	if (str)
-	{
-		while (s[i])
-		{
-			str[i] = (*f)(s[i]);
-			i++;
-		}
-		str[i] = '\0';
-	}
-	else
-		return (NULL);
-	return (str);
+	ft_bzero(tab, size + 1);
+	return (tab);
 }

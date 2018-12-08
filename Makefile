@@ -6,13 +6,11 @@
 #    By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/06 17:12:14 by pdavid            #+#    #+#              #
-#    Updated: 2018/12/07 19:31:34 by pdavid           ###   ########.fr        #
+#    Updated: 2018/12/07 19:53:33 by pdavid           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-make_libft = @make -C ./includes/libft/
-
-SRC = printf.c print_str.c print_char.c main.c print_int.c get.c spec.c print_wchar.c print_wstr.c ft_ltoa.c
+SRC = *.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -21,7 +19,7 @@ OBJDIR = objs
 
 SRCS = $(addprefix $(SRCDIR)/, $(SRC))
 OBJS = $(addprefix $(OBJDIR)/, $(OBJ))
-HEADER = -I includes includes/libft/
+HEADER = -I includes
 
 CC = gcc
 CFLAGS = -c -Wall -Wextra -Werror
@@ -38,12 +36,12 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c
 	@$(CC) $(CFLAGS) $(HEADER) $< -o $@
 
 $(NAME): $(OBJS)
-	@ar rcs $(NAME) $(OBJS)
-	@ranlib $(NAME)
-	@echo "[ft_printf - made]"
+	@ar rcs $@ $^
+	@ranlib $@
+	@echo "[ft_printf - 모래반지 빵야빵야!]"
 
 clean:
-	@/bin/rm -rf $(OBJ)
+	@/bin/rm -rf $(OBJDIR)
 	@echo "[ft_printf - clean]"
 
 fclean: clean

@@ -1,32 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_wordcount.c                                     :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/05 13:08:49 by pdavid            #+#    #+#             */
-/*   Updated: 2017/12/05 13:27:22 by pdavid           ###   ########.fr       */
+/*   Created: 2017/09/21 14:25:21 by pdavid            #+#    #+#             */
+/*   Updated: 2018/12/07 19:55:23 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/ft_printf.h"
 
-int	ft_wordcount(char *s, char c)
+int	ft_atoi(const char *str)
 {
 	int i;
-	int words;
+	int sign;
+	int res;
 
-	words = 0;
 	i = 0;
-	while (s[i])
+	sign = 1;
+	res = 0;
+	while ((str[i] == ' ') || (str[i] == '\t') || (str[i] == '\n')
+	|| (str[i] == '\v') || (str[i] == '\f') || (str[i] == '\r'))
+		i++;
+	if (str[i] == 45)
 	{
-		while (s[i] == c && s[i] != '\0')
-			i++;
-		if (s[i] == '\0')
-			words++;
-		while (s[i] != c && s[i] != '\0')
-			i++;
+		sign = -1;
+		i++;
 	}
-	return (words);
+	else if (str[i] == 43)
+	{
+		i++;
+	}
+	while (ft_isdigit(str[i]))
+	{
+		res = (res * 10) + (str[i] - 48);
+		i++;
+	}
+	return (res *= sign);
 }
