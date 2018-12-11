@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 13:55:18 by pdavid            #+#    #+#             */
-/*   Updated: 2018/12/07 23:20:15 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/12/11 12:30:15 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ typedef	struct		s_flags
 	int				zero;
 	int				width;
 	int				prec;
-	char				mod;
+	char			mod;
 }					t_flags;
 
 typedef	struct		s_tags
@@ -101,6 +101,13 @@ void	int_prec(t_env *e);
 void	int_width(t_env *e);
 void	int_print(t_env *e);
 
+/* base functions */
+
+void    init_base(t_env *e, char type, long val);
+void    width_base(t_env *e, char type);
+void    prec_base(t_env *e, char type);
+void    print_base(t_env *e, char type, long val);
+
 /* specification */
 
 void	spec_char(t_env *e);
@@ -109,6 +116,7 @@ void	spec_int(t_env *e);
 void	spec_percent(t_env *e);
 void	spec_wchar(t_env *e, char type);
 void	spec_wstr(t_env *e, char type);
+void	spec_base(t_env *e, char type);
 
 /* helper functions */
 
@@ -116,6 +124,8 @@ int		ft_isdigit(int c);
 int		ft_atoi(const char *str);
 char	*ft_itoa(int nbr);
 char	*ft_ltoa(long n);
+char	*ft_ultoa(unsigned long n, int base);
+void	ft_strlower(char *s);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *src);
 char	*ft_strjoin(char const *s1, char const *s2);

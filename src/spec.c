@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 18:05:54 by pdavid            #+#    #+#             */
-/*   Updated: 2018/12/07 23:20:01 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/12/11 12:44:44 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,48 @@ void	spec_int(t_env *e)
 	else if (e->flag->mod == 0)
 		e->output = ft_itoa((int)tmp);
 	int_print(e);
+}
+
+void spec_base(t_env *e, char type)
+{
+	long			tmp;
+	unsigned long	val;
+	
+	tmp = va_arg(e->ap, long);
+	val = 0;
+	if (type == 'O' || e->flag->mod == 1 || e->flag->mod == 2 || e->flag->mod == 3 || e->flag->mod == 4 || e->flag->mod == 5)
+	{
+		val = (unsigned long)tmp;
+	}
+	else if (e->flag->mod == 1)
+	{
+		val = (unsigned short)tmp;
+	}
+	else if (e->flag->mod == 0)
+	{
+		val = (unsigned int)tmp;
+	}
+	if (type == 'b' || type == 'B')
+	{
+		e->output = ft_ultoa(val, 2);
+	}
+	if (type == 'o' || type == 'O')
+	{
+		e->output = ft_ultoa(val, 8);
+	}
+	if (type == 'x' || type == 'X')
+	{
+		e->output = ft_ultoa(val, 16);
+	}
+	if (type == 'x' || type == 'o' || type == 'b')
+	{
+		ft_strlower(e->output);
+	}
+	if (e->flag->minus == 1)
+	{
+		e->flag->zero = 0;
+	}
+	print_base(e, type, (long)val);
 }
 
 void	spec_percent(t_env *e)

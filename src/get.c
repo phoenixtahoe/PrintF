@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 15:02:24 by pdavid            #+#    #+#             */
-/*   Updated: 2018/12/07 23:20:19 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/12/11 12:47:15 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ void	get_width(t_env *e)
 
 void get_spec(t_env *e, const char *format)
 {
+	if (ft_strchr("boxBOX", format[e->i]))
+		spec_base(e, format[e->i]);
 	if (format[e->i] == 'c')
 		spec_char(e);
 	else if (format[e->i] == 's')
@@ -33,7 +35,7 @@ void get_spec(t_env *e, const char *format)
 			spec_wchar(e, format[e->i]);
 		else
 			spec_wstr(e, format[e->i]);
-	else if (format[e->i] == 'd' || format[e->i] == 'i')
+	else if (format[e->i] == 'd' || format[e->i] == 'i' || format[e->i] == 'D')
 		spec_int(e);
 	else if (format[e->i] == '%')
 		spec_percent(e);

@@ -1,26 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_ultoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/06 17:45:54 by pdavid            #+#    #+#             */
-/*   Updated: 2018/12/11 12:57:03 by pdavid           ###   ########.fr       */
+/*   Created: 2018/12/11 12:05:42 by pdavid            #+#    #+#             */
+/*   Updated: 2018/12/11 12:06:03 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_printf.h"
-#include <locale.h>
-#include <stdlib.h>
-#include <stddef.h>
-# define YELLOW        "\x1B[33m"
-# define CURT		"\x1B[0m"
 
-
-int main()
+char	*ft_ultoa(unsigned long n, int base)
 {
-	ft_printf("%10x\n", 42);
-	printf("%10x\n", 42);
-	return (0);
+	char			*s;
+	unsigned long	nb;
+	int				len;
+
+	len = 1;
+	nb = n;
+	while (nb >= (unsigned)base)
+	{
+		nb /= base;
+		++len;
+	}
+	s = (char*)malloc(sizeof(char) * (len + 1));
+	s[len] = '\0';
+	while (n >= (unsigned)base)
+	{
+		s[--len] = n % base < 10 ? (n % base) + 48 : (n % base) + 55;
+		n /= base;
+	}
+	s[--len] = n % base < 10 ? (n % base) + 48 : (n % base) + 55;
+	return (s);
 }

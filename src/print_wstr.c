@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/06 11:49:00 by pdavid            #+#    #+#             */
-/*   Updated: 2018/12/06 15:07:56 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/12/07 23:45:03 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int    wstr_width(wchar_t *c)
     int i;
     int len;
 
-    i = -1;
     len = 0;
+    i = -1;
     while (c[++i] != 0)
 	{
 		if (c[i] <= 0x7F)
@@ -68,17 +68,15 @@ int    wstr_width(wchar_t *c)
 void	print_wstr(t_env *e, wchar_t *c)
 {
     int i;
-    int len;
 
     i = -1;
-    len = 0;
     if (e->flag->prec < 0)
     {
-        len = wstr_width(c);
+        e->len = wstr_width(c);
     }
     else
     {
-        len = e->flag->prec;
+        e->len = e->flag->prec;
     }
     if (e->flag->minus)
     {
@@ -95,7 +93,7 @@ void	print_wstr(t_env *e, wchar_t *c)
             {
                 put_wstr(e, c[i]);
             }
-            while (e->flag->width-- > len)
+            while (e->flag->width-- > 1)
             {
                 if (e->flag->zero == 1)
                 {
@@ -110,7 +108,7 @@ void	print_wstr(t_env *e, wchar_t *c)
     }
     else
     {
-        while (e->flag->width-- > len)
+        while (e->flag->width-- > 1)
         {
             if (e->flag->zero == 1)
             {
