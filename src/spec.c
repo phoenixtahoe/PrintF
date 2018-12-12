@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 18:05:54 by pdavid            #+#    #+#             */
-/*   Updated: 2018/12/11 12:44:44 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/12/12 10:59:33 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,27 @@ void	spec_int(t_env *e)
 	int_print(e);
 }
 
+void	spec_uint(t_env *e, char type)
+{
+	long	tmp;
+
+	tmp = va_arg(e->ap, long);
+	e->flag->space = 0;
+	e->flag->zero = 0;
+	if (tmp == LLONG_MAX || tmp == LONG_MIN)
+		e->output = ft_strdup("-9223372036854775808");
+	else if (type == 'D' || type == 'U' || e->flag->mod == 3 || e->flag->mod == 4 || e->flag->mod == 5)
+		e->output = ft_ultoa((unsigned long)tmp);
+		else if (e->flag->mod == 2)
+		e->output = ft_ultoa((unsigned char)tmp);
+	else if (e->flag->mod == 1)
+		e->output = ft_ultoa((unsigned short)tmp);
+	else if (e->flag->mod == 0 && type != 'U')
+		e->output = ft_ultoa((unsigned int)tmp);
+	int_print(e);
+}
+
+
 void spec_base(t_env *e, char type)
 {
 	long			tmp;
@@ -77,15 +98,15 @@ void spec_base(t_env *e, char type)
 	}
 	if (type == 'b' || type == 'B')
 	{
-		e->output = ft_ultoa(val, 2);
+		e->output = ft_ulbase(val, 2);
 	}
 	if (type == 'o' || type == 'O')
 	{
-		e->output = ft_ultoa(val, 8);
+		e->output = ft_ulbase(val, 8);
 	}
 	if (type == 'x' || type == 'X')
 	{
-		e->output = ft_ultoa(val, 16);
+		e->output = ft_ulbase(val, 16);
 	}
 	if (type == 'x' || type == 'o' || type == 'b')
 	{

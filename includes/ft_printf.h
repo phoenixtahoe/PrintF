@@ -6,7 +6,7 @@
 /*   By: pdavid <pdavid@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/06 13:55:18 by pdavid            #+#    #+#             */
-/*   Updated: 2018/12/11 12:30:15 by pdavid           ###   ########.fr       */
+/*   Updated: 2018/12/12 11:01:15 by pdavid           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void	spec_percent(t_env *e);
 void	spec_wchar(t_env *e, char type);
 void	spec_wstr(t_env *e, char type);
 void	spec_base(t_env *e, char type);
+void	spec_uint(t_env *e, char type);
 
 /* helper functions */
 
@@ -124,7 +125,8 @@ int		ft_isdigit(int c);
 int		ft_atoi(const char *str);
 char	*ft_itoa(int nbr);
 char	*ft_ltoa(long n);
-char	*ft_ultoa(unsigned long n, int base);
+char	*ft_ultoa(unsigned long n);
+char	*ft_ulbase(unsigned long n, int base);
 void	ft_strlower(char *s);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *src);
